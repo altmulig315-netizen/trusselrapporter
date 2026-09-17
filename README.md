@@ -23,8 +23,15 @@ Prosjektet følger **apv2.2**.
 1. `node stamp.js <ny versjon>`
 2. Fyll ut CHANGELOG (erstatt `TODO`)
 3. Gjør endringen
-4. `node bolletest.js` — må være GRØNN
-5. `git commit` (hooken kjører bolletesten igjen og blokkerer ved feil)
+4. `node build.js` — regenererer `index.html` med nytt stempel
+5. `node bolletest.js` — må være GRØNN
+6. `git commit` (hooken kjører bolletesten igjen og blokkerer ved feil)
+
+## Daglig drift
+
+```sh
+node poll.js --skriv && node build.js && node bolletest.js && git commit -am "poll: $(date +%F)"
+```
 
 ## Etter kloning
 

@@ -4,6 +4,17 @@ Alle vesentlige endringer i prosjektet dokumenteres her.
 Formatet følger [Keep a Changelog](https://keepachangelog.com/no/1.1.0/),
 og prosjektet bruker [SemVer](https://semver.org/lang/no/).
 
+## [0.4.0] — 2026-09-17
+
+### Added
+- Etappe 3: `build.js` genererer `index.html` fra `sources.json`, `version.json` og `CHANGELOG.md`.
+  Helt statisk — browser-JS gjør kun filtrering.
+- Årshjul: rullerende 12 måneder med forventede utgivelser; egen boks for «forventet, men ikke observert».
+- Tabell filtrerbar på kategori, land, metode og fritekst.
+- Docs-panel med versjonsrad, byggedato, kildeantall, kolonneforklaring og siste changelog-seksjon.
+- Versjon stemplet i header-kommentar, footer (`data-version`) og docs-panel (`data-docs-version`) —
+  bolletesten sjekker nå alle fire feltene fra apv2.2 §4 (8 stempler totalt).
+
 ## [0.3.0] — 2026-09-17
 
 ### Added

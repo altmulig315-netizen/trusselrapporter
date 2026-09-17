@@ -1,0 +1,440 @@
+<!doctype html>
+<!-- @version 0.4.0 — generert av build.js 2026-09-17. Ikke rediger for hånd; endre sources.json og kjør node build.js -->
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trusselrapporter</title>
+<meta name="description" content="Oppslagsverk og utgivelseskalender for globale trusselvurderinger og sikkerhetsrapporter.">
+<style>
+:root {
+  --bg: #f6f7f9; --fg: #1a1d21; --muted: #6b7280; --line: #e2e5ea; --card: #ffffff;
+  --accent: #1f5fbf; --ok: #1f7a4d; --naa: #b45309; --forfalt: #b42318; --forfalt-bg: #fdf1f0;
+  --tag-nasjonal: #dbeafe; --tag-eu: #ede9fe; --tag-five-eyes: #dcfce7; --tag-leverandor: #fef3c7; --tag-finans: #fce7f3; --tag-ot: #e0f2fe;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg: #0f1216; --fg: #e6e8eb; --muted: #9aa3ad; --line: #262b33; --card: #171b21;
+  --accent: #7aa7ff; --ok: #5cc48a; --naa: #f0a44b; --forfalt: #ff7b6b; --forfalt-bg: #2a1614;
+  --tag-nasjonal: #1e3a5f; --tag-eu: #3b2f66; --tag-five-eyes: #1d4a30; --tag-leverandor: #5a4212; --tag-finans: #5a1f3c; --tag-ot: #143d55;
+} }
+* { box-sizing: border-box; }
+html { color-scheme: light dark; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.dim { color: var(--muted); }
+header { border-bottom: 1px solid var(--line); background: var(--card); padding: 28px 0 20px; }
+h1 { margin: 0; font-size: 26px; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 12px; }
+.ver { font-size: 12px; font-weight: 500; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; font-variant-numeric: tabular-nums; }
+.under { margin: 6px 0 0; color: var(--muted); }
+h2 { font-size: 18px; margin: 36px 0 14px; }
+h3 { font-size: 14px; margin: 0 0 6px; }
+h4 { font-size: 14px; margin: 18px 0 6px; }
+
+/* Årshjul */
+.hjul { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.mnd { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.mnd.naa { border-color: var(--naa); box-shadow: inset 3px 0 0 var(--naa); }
+.mnd ul { margin: 0; padding: 0; list-style: none; } .mnd li { padding: 3px 0; font-size: 14px; }
+.mnd .m { margin-left: 6px; color: var(--muted); font-size: 12px; }
+.forfalt-boks { background: var(--forfalt-bg); border: 1px solid var(--forfalt); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; }
+.forfalt-boks h3 { color: var(--forfalt); }
+.forfalt-boks ul { margin: 0; padding: 0; list-style: none; } .forfalt-boks li { padding: 3px 0; font-size: 14px; }
+
+/* Filter */
+.filter { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.filter input, .filter select { font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--fg); }
+.filter input { flex: 1 1 220px; min-width: 180px; }
+#antall { margin-left: auto; font-size: 13px; }
+
+/* Tabell */
+.tabell-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+tr[hidden] { display: none; }
+td.utgiver { white-space: nowrap; font-weight: 500; }
+td.navn { min-width: 240px; }
+td.siste, td.forventet { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.status { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+.forfalt { color: var(--forfalt); } .naa { color: var(--naa); }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; white-space: nowrap; }
+.tag-nasjonal { background: var(--tag-nasjonal); } .tag-eu { background: var(--tag-eu); } .tag-five-eyes { background: var(--tag-five-eyes); }
+.tag-leverandor { background: var(--tag-leverandor); } .tag-finans { background: var(--tag-finans); } .tag-ot { background: var(--tag-ot); }
+.metode { font-size: 12px; padding: 1px 8px; border-radius: 4px; border: 1px solid var(--line); white-space: nowrap; }
+.metode-feed { color: var(--ok); border-color: var(--ok); }
+.notat { display: inline-block; margin-left: 6px; width: 16px; height: 16px; line-height: 16px; text-align: center; border-radius: 50%; background: var(--line); color: var(--muted); font-size: 11px; font-style: italic; cursor: help; }
+
+/* Docs */
+details { margin: 36px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
+.docs-inner { padding: 4px 16px 16px; }
+.docs-tabell { width: auto; } .docs-tabell th { text-transform: none; letter-spacing: 0; font-size: 14px; padding-left: 0; }
+dl { margin: 0; } dt { font-weight: 600; margin-top: 8px; } dd { margin: 2px 0 0; color: var(--muted); }
+.forfalt-inline { color: var(--forfalt); font-weight: 600; }
+pre.logg { white-space: pre-wrap; font-size: 13px; background: var(--bg); padding: 10px 12px; border-radius: 6px; margin: 0; }
+
+footer { border-top: 1px solid var(--line); margin-top: 20px; padding: 18px 0 28px; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { h1 { font-size: 22px; } th, td { padding: 8px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Trusselrapporter <span class="ver" title="Versjon">v0.4.0</span></h1>
+    <p class="under">Hvem utgir hva, når det kommer, og hvor du finner det. 23 kilder · oppdatert 2026-09-17</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="kalender">
+    <h2>Neste 12 måneder</h2>
+    <div class="hjul"><div class="mnd naa">
+  <h3>September <span class="dim">2026</span></h3>
+  <p class="dim">—</p>
+</div>
+<div class="mnd">
+  <h3>Oktober <span class="dim">2026</span></h3>
+  <ul><li><a href="https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends" rel="noopener">ENISA</a> — ENISA Threat Landscape (ETL)<span class="m lenke">↗</span></li><li><a href="https://www.microsoft.com/en-us/security/security-insider/threat-landscape/microsoft-digital-defense-report-archives" rel="noopener">Microsoft</a> — Microsoft Digital Defense Report (MDDR)<span class="m feed">⟳</span></li><li><a href="https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025" rel="noopener">NCSC (UK)</a> — Annual Review<span class="m feed">⟳</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>November <span class="dim">2026</span></h3>
+  <p class="dim">—</p>
+</div>
+<div class="mnd">
+  <h3>Desember <span class="dim">2026</span></h3>
+  <ul><li><a href="https://www.bankingsupervision.europa.eu/framework/priorities/html/index.en.html" rel="noopener">ECB Banktilsyn (SSM)</a> — SSM Supervisory Priorities<span class="m feed">⟳</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>Januar <span class="dim">2027</span></h3>
+  <ul><li><a href="https://www.nsa.gov/Cybersecurity/Year-in-Review/" rel="noopener">NSA</a> — Cybersecurity Year in Review<span class="m lenke">↗</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>Februar <span class="dim">2027</span></h3>
+  <ul><li><a href="https://www.crowdstrike.com/en-us/global-threat-report/" rel="noopener">CrowdStrike</a> — Global Threat Report<span class="m feed">⟳</span></li><li><a href="https://www.dragos.com/ot-cybersecurity-year-in-review/" rel="noopener">Dragos</a> — OT/ICS Cybersecurity Year in Review<span class="m lenke">↗</span></li><li><a href="https://www.etterretningstjenesten.no/publikasjoner/fokus" rel="noopener">Etterretningstjenesten</a> — Fokus<span class="m lenke">↗</span></li><li><a href="https://www.pst.no/trusselbilde/norsk-trusselvurdering/" rel="noopener">PST</a> — Nasjonal trusselvurdering<span class="m feed">⟳</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>Mars <span class="dim">2027</span></h3>
+  <ul><li><a href="https://www.eeas.europa.eu/eeas/tackling-disinformation-foreign-information-manipulation-interference_en" rel="noopener">EEAS</a> — Report on Foreign Information Manipulation and Interference Threats<span class="m lenke">↗</span></li><li><a href="https://www.fsisac.com/navigatingcyber2025" rel="noopener">FS-ISAC</a> — Navigating Cyber<span class="m lenke">↗</span></li><li><a href="https://nsm.no/regelverk-og-hjelp/rapporter/" rel="noopener">NSM</a> — Risiko<span class="m feed">⟳</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>April <span class="dim">2027</span></h3>
+  <ul><li><a href="https://cloud.google.com/security/resources/m-trends" rel="noopener">Google / Mandiant</a> — M-Trends<span class="m lenke">↗</span></li><li><a href="https://www.sophos.com/en-us/content/security-threat-report" rel="noopener">Sophos</a> — Annual Threat Report<span class="m lenke">↗</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>Mai <span class="dim">2027</span></h3>
+  <ul><li><a href="https://www.verizon.com/business/resources/reports/dbir/" rel="noopener">Verizon</a> — Data Breach Investigations Report (DBIR)<span class="m lenke">↗</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>Juni <span class="dim">2027</span></h3>
+  <ul><li><a href="https://nationalcrimeagency.gov.uk/nsa" rel="noopener">NCA (UK)</a> — National Strategic Assessment of Serious and Organised Crime<span class="m feed">⟳</span></li><li><a href="https://www.sophos.com/en-us/content/state-of-ransomware" rel="noopener">Sophos</a> — The State of Ransomware<span class="m lenke">↗</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>Juli <span class="dim">2027</span></h3>
+  <ul><li><a href="https://www.europol.europa.eu/publications-events/main-reports/iocta-report" rel="noopener">Europol</a> — Internet Organised Crime Threat Assessment (IOCTA)<span class="m feed">⟳</span></li></ul>
+</div>
+<div class="mnd">
+  <h3>August <span class="dim">2027</span></h3>
+  <p class="dim">—</p>
+</div></div>
+  </section>
+
+  <section id="oppslag">
+    <h2>Alle kilder</h2>
+    <div class="filter" id="filter">
+  <input type="search" id="sok" placeholder="Søk utgiver eller rapport…" aria-label="Søk">
+  <select id="f-kategori" aria-label="Kategori"><option value="">Alle kategorier</option><option value="eu">EU</option><option value="finans">Finans</option><option value="five-eyes">Five Eyes</option><option value="leverandor">Leverandør</option><option value="nasjonal">Nasjonal (NO)</option><option value="ot">OT/ICS</option></select>
+  <select id="f-land" aria-label="Land"><option value="">Alle land</option><option value="EU">EU</option><option value="INT">Internasjonal</option><option value="NO">Norge</option><option value="UK">Storbritannia</option><option value="US">USA</option></select>
+  <select id="f-metode" aria-label="Metode"><option value="">Feed og lenke</option><option value="feed">Feed</option><option value="lenke">Lenke</option></select>
+  <span id="antall" class="dim"></span>
+</div>
+    <div class="tabell-wrap">
+    <table id="tabell">
+<thead><tr>
+  <th>Utgiver</th><th>Rapport</th><th>Kategori</th><th>Land</th><th>Kadens</th><th>Siste utgave</th><th>Forventet neste</th><th>Metode</th>
+</tr></thead>
+<tbody>
+<tr data-kategori="eu" data-land="EU" data-metode="lenke" data-sok="eeas report on foreign information manipulation and interference threats eeas-fimi">
+  <td class="utgiver">EEAS</td>
+  <td class="navn"><a href="https://www.eeas.europa.eu/eeas/tackling-disinformation-foreign-information-manipulation-interference_en" rel="noopener">Report on Foreign Information Manipulation and Interference Threats</a><span class="notat" title="Siste på landingssiden er 3. rapport (2025). Ingen 4. rapport funnet per 2026-09-17.">i</span></td>
+  <td><span class="tag tag-eu">EU</span></td>
+  <td>EU</td>
+  <td>Årlig</td>
+  <td class="siste">2025</td>
+  <td class="forventet ok">mar 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="eu" data-land="EU" data-metode="lenke" data-sok="enisa enisa threat landscape (etl) enisa-threat-landscape">
+  <td class="utgiver">ENISA</td>
+  <td class="navn"><a href="https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends" rel="noopener">ENISA Threat Landscape (ETL)</a><span class="notat" title="ENISA har ingen RSS-feed (verifisert 2026-09-10 og 2026-09-17).">i</span></td>
+  <td><span class="tag tag-eu">EU</span></td>
+  <td>EU</td>
+  <td>Årlig</td>
+  <td class="siste"><a href="https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025" rel="noopener">2025</a></td>
+  <td class="forventet ok">okt 2026</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="eu" data-land="EU" data-metode="feed" data-sok="europol internet organised crime threat assessment (iocta) europol-iocta">
+  <td class="utgiver">Europol</td>
+  <td class="navn"><a href="https://www.europol.europa.eu/publications-events/main-reports/iocta-report" rel="noopener">Internet Organised Crime Threat Assessment (IOCTA)</a></td>
+  <td><span class="tag tag-eu">EU</span></td>
+  <td>EU</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">jul 2027</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.europol.europa.eu/rss.xml">Feed</span></td>
+</tr>
+<tr data-kategori="eu" data-land="EU" data-metode="feed" data-sok="europol serious and organised crime threat assessment (socta) europol-socta">
+  <td class="utgiver">Europol</td>
+  <td class="navn"><a href="https://www.europol.europa.eu/publications-events/main-reports/socta-report" rel="noopener">Serious and Organised Crime Threat Assessment (SOCTA)</a></td>
+  <td><span class="tag tag-eu">EU</span></td>
+  <td>EU</td>
+  <td>Hvert 4. år</td>
+  <td class="siste">2025</td>
+  <td class="forventet ok">mar 2029</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.europol.europa.eu/rss.xml">Feed</span></td>
+</tr>
+<tr data-kategori="finans" data-land="INT" data-metode="feed" data-sok="bis — financial stability institute fsi-publikasjoner om cyber bis-fsi-cyber">
+  <td class="utgiver">BIS — Financial Stability Institute</td>
+  <td class="navn"><a href="https://www.bis.org/fsi/index.htm" rel="noopener">FSI-publikasjoner om cyber</a><span class="notat" title="Feeden er RSS 1.0/RDF, ikke RSS 2.0 — parseren må håndtere begge.">i</span></td>
+  <td><span class="tag tag-finans">Finans</span></td>
+  <td>Internasjonal</td>
+  <td>Løpende</td>
+  <td class="siste"><a href="https://www.bis.org/publications/fsi-paper-28-when-machines-attack-frontier-ai-cyber-threats-and-policy-responses-financial-sector" rel="noopener">9. sep 2026</a></td>
+  <td class="forventet ok"><span class="dim">løpende</span><span class="status">løpende</span></td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.bis.org/doclist/bis_fsi_publs.rss">Feed</span></td>
+</tr>
+<tr data-kategori="finans" data-land="EU" data-metode="feed" data-sok="ecb banktilsyn (ssm) ssm supervisory priorities ecb-ssm-supervisory-priorities">
+  <td class="utgiver">ECB Banktilsyn (SSM)</td>
+  <td class="navn"><a href="https://www.bankingsupervision.europa.eu/framework/priorities/html/index.en.html" rel="noopener">SSM Supervisory Priorities</a><span class="notat" title="Prioriteringene for 2026–2028 ble publisert desember 2025.">i</span></td>
+  <td><span class="tag tag-finans">Finans</span></td>
+  <td>EU</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">des 2026</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.bankingsupervision.europa.eu/rss/press.html">Feed</span></td>
+</tr>
+<tr data-kategori="finans" data-land="INT" data-metode="feed" data-sok="financial stability board cyber- og operasjonell resiliens (publikasjoner) fsb-cyber">
+  <td class="utgiver">Financial Stability Board</td>
+  <td class="navn"><a href="https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/cyber-resilience/" rel="noopener">Cyber- og operasjonell resiliens (publikasjoner)</a></td>
+  <td><span class="tag tag-finans">Finans</span></td>
+  <td>Internasjonal</td>
+  <td>Løpende</td>
+  <td class="siste"><a href="https://www.fsb.org/2026/09/fsb-hosts-roundtable-on-public-private-sector-collaboration-to-strengthen-operational-resilience/" rel="noopener">11. sep 2026</a></td>
+  <td class="forventet ok"><span class="dim">løpende</span><span class="status">løpende</span></td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.fsb.org/feed/">Feed</span></td>
+</tr>
+<tr data-kategori="finans" data-land="INT" data-metode="lenke" data-sok="fs-isac navigating cyber fsisac-navigating-cyber">
+  <td class="utgiver">FS-ISAC</td>
+  <td class="navn"><a href="https://www.fsisac.com/navigatingcyber2025" rel="noopener">Navigating Cyber</a><span class="notat" title="Ingen 2026-utgave funnet per 2026-09-17. Landingssiden er årsspesifikk — må oppdateres manuelt ved ny utgave.">i</span></td>
+  <td><span class="tag tag-finans">Finans</span></td>
+  <td>Internasjonal</td>
+  <td>Årlig</td>
+  <td class="siste"><a href="https://www.fsisac.com/navigatingcyber2025" rel="noopener">2025</a></td>
+  <td class="forventet ok">mar 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="five-eyes" data-land="US" data-metode="feed" data-sok="cisa / nsa / fbi joint cybersecurity advisories cisa-advisories">
+  <td class="utgiver">CISA / NSA / FBI</td>
+  <td class="navn"><a href="https://www.cisa.gov/news-events/cybersecurity-advisories" rel="noopener">Joint Cybersecurity Advisories</a></td>
+  <td><span class="tag tag-five-eyes">Five Eyes</span></td>
+  <td>USA</td>
+  <td>Løpende</td>
+  <td class="siste"><a href="https://www.cisa.gov/news-events/alerts/2026/09/16/cisa-adds-one-known-exploited-vulnerability-catalog" rel="noopener">16. sep 2026</a></td>
+  <td class="forventet ok"><span class="dim">løpende</span><span class="status">løpende</span></td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.cisa.gov/cybersecurity-advisories/all.xml">Feed</span></td>
+</tr>
+<tr data-kategori="five-eyes" data-land="US" data-metode="feed" data-sok="cisa known exploited vulnerabilities catalog cisa-kev">
+  <td class="utgiver">CISA</td>
+  <td class="navn"><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" rel="noopener">Known Exploited Vulnerabilities Catalog</a></td>
+  <td><span class="tag tag-five-eyes">Five Eyes</span></td>
+  <td>USA</td>
+  <td>Løpende</td>
+  <td class="siste"><a href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json" rel="noopener">16. sep 2026</a></td>
+  <td class="forventet ok"><span class="dim">løpende</span><span class="status">løpende</span></td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json">Feed</span></td>
+</tr>
+<tr data-kategori="five-eyes" data-land="UK" data-metode="feed" data-sok="nca (uk) national strategic assessment of serious and organised crime nca-national-strategic-assessment">
+  <td class="utgiver">NCA (UK)</td>
+  <td class="navn"><a href="https://nationalcrimeagency.gov.uk/nsa" rel="noopener">National Strategic Assessment of Serious and Organised Crime</a></td>
+  <td><span class="tag tag-five-eyes">Five Eyes</span></td>
+  <td>Storbritannia</td>
+  <td>Årlig</td>
+  <td class="siste"><a href="https://www.nationalcrimeagency.gov.uk/nsa-2026" rel="noopener">2026</a></td>
+  <td class="forventet ok">jun 2027</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.nationalcrimeagency.gov.uk/news?format=feed&amp;type=rss">Feed</span></td>
+</tr>
+<tr data-kategori="five-eyes" data-land="UK" data-metode="feed" data-sok="ncsc (uk) annual review ncsc-uk-annual-review">
+  <td class="utgiver">NCSC (UK)</td>
+  <td class="navn"><a href="https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025" rel="noopener">Annual Review</a><span class="notat" title="Nyhetsfeeden brukes — rapportfeeden (report-rss-feed.xml) har stått stille siden mai 2025.">i</span></td>
+  <td><span class="tag tag-five-eyes">Five Eyes</span></td>
+  <td>Storbritannia</td>
+  <td>Årlig</td>
+  <td class="siste"><a href="https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025" rel="noopener">2025</a></td>
+  <td class="forventet ok">okt 2026</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml">Feed</span></td>
+</tr>
+<tr data-kategori="five-eyes" data-land="US" data-metode="lenke" data-sok="nsa cybersecurity year in review nsa-year-in-review">
+  <td class="utgiver">NSA</td>
+  <td class="navn"><a href="https://www.nsa.gov/Cybersecurity/Year-in-Review/" rel="noopener">Cybersecurity Year in Review</a><span class="notat" title="Ingen 2025-utgave publisert per 2026-09-17 — siste er 2024. Kan være forsinket eller avviklet. nsa.gov gir 403 for automatiserte kall.">i</span></td>
+  <td><span class="tag tag-five-eyes">Five Eyes</span></td>
+  <td>USA</td>
+  <td>Årlig</td>
+  <td class="siste">2024</td>
+  <td class="forventet ok">jan 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="leverandor" data-land="US" data-metode="feed" data-sok="crowdstrike global threat report crowdstrike-global-threat-report">
+  <td class="utgiver">CrowdStrike</td>
+  <td class="navn"><a href="https://www.crowdstrike.com/en-us/global-threat-report/" rel="noopener">Global Threat Report</a></td>
+  <td><span class="tag tag-leverandor">Leverandør</span></td>
+  <td>USA</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">feb 2027</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.crowdstrike.com/blog/feed/">Feed</span></td>
+</tr>
+<tr data-kategori="leverandor" data-land="US" data-metode="lenke" data-sok="google / mandiant m-trends google-mandiant-m-trends">
+  <td class="utgiver">Google / Mandiant</td>
+  <td class="navn"><a href="https://cloud.google.com/security/resources/m-trends" rel="noopener">M-Trends</a><span class="notat" title="Google Cloud-bloggen har ingen fungerende RSS (Angular-app). GTIG-rapporter publiseres samme sted.">i</span></td>
+  <td><span class="tag tag-leverandor">Leverandør</span></td>
+  <td>USA</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">apr 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="leverandor" data-land="US" data-metode="feed" data-sok="microsoft microsoft digital defense report (mddr) microsoft-digital-defense-report">
+  <td class="utgiver">Microsoft</td>
+  <td class="navn"><a href="https://www.microsoft.com/en-us/security/security-insider/threat-landscape/microsoft-digital-defense-report-archives" rel="noopener">Microsoft Digital Defense Report (MDDR)</a></td>
+  <td><span class="tag tag-leverandor">Leverandør</span></td>
+  <td>USA</td>
+  <td>Årlig</td>
+  <td class="siste">2025</td>
+  <td class="forventet ok">okt 2026</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://www.microsoft.com/en-us/security/blog/feed/">Feed</span></td>
+</tr>
+<tr data-kategori="leverandor" data-land="UK" data-metode="lenke" data-sok="sophos annual threat report sophos-annual-threat-report">
+  <td class="utgiver">Sophos</td>
+  <td class="navn"><a href="https://www.sophos.com/en-us/content/security-threat-report" rel="noopener">Annual Threat Report</a><span class="notat" title="Ingen 2026-utgave per 2026-09-17. sophos.com blokkerer automatiserte kall (WAF) — verifisert i nettleser.">i</span></td>
+  <td><span class="tag tag-leverandor">Leverandør</span></td>
+  <td>Storbritannia</td>
+  <td>Årlig</td>
+  <td class="siste">2025</td>
+  <td class="forventet ok">apr 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="leverandor" data-land="UK" data-metode="lenke" data-sok="sophos the state of ransomware sophos-state-of-ransomware">
+  <td class="utgiver">Sophos</td>
+  <td class="navn"><a href="https://www.sophos.com/en-us/content/state-of-ransomware" rel="noopener">The State of Ransomware</a><span class="notat" title="7. utgave (2026). Undersøkelsen gjennomføres jan–mar, rapporten kommer typisk mai–juni.">i</span></td>
+  <td><span class="tag tag-leverandor">Leverandør</span></td>
+  <td>Storbritannia</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">jun 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="leverandor" data-land="US" data-metode="lenke" data-sok="verizon data breach investigations report (dbir) verizon-dbir">
+  <td class="utgiver">Verizon</td>
+  <td class="navn"><a href="https://www.verizon.com/business/resources/reports/dbir/" rel="noopener">Data Breach Investigations Report (DBIR)</a></td>
+  <td><span class="tag tag-leverandor">Leverandør</span></td>
+  <td>USA</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">mai 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="nasjonal" data-land="NO" data-metode="lenke" data-sok="etterretningstjenesten fokus etjenesten-fokus">
+  <td class="utgiver">Etterretningstjenesten</td>
+  <td class="navn"><a href="https://www.etterretningstjenesten.no/publikasjoner/fokus" rel="noopener">Fokus</a><span class="notat" title="Nettstedet har bot-beskyttelse (&quot;Client Challenge&quot;) — ingen feed, må sjekkes manuelt.">i</span></td>
+  <td><span class="tag tag-nasjonal">Nasjonal (NO)</span></td>
+  <td>Norge</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">feb 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+<tr data-kategori="nasjonal" data-land="NO" data-metode="feed" data-sok="nsm risiko nsm-risiko">
+  <td class="utgiver">NSM</td>
+  <td class="navn"><a href="https://nsm.no/regelverk-og-hjelp/rapporter/" rel="noopener">Risiko</a></td>
+  <td><span class="tag tag-nasjonal">Nasjonal (NO)</span></td>
+  <td>Norge</td>
+  <td>Årlig</td>
+  <td class="siste"><a href="https://nsm.no/aktuelt/risiko-2026" rel="noopener">2026</a></td>
+  <td class="forventet ok">mar 2027</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://nsm.no/rss/alle-oppdateringer-fra-nsm/">Feed</span></td>
+</tr>
+<tr data-kategori="nasjonal" data-land="NO" data-metode="feed" data-sok="pst nasjonal trusselvurdering pst-nasjonal-trusselvurdering">
+  <td class="utgiver">PST</td>
+  <td class="navn"><a href="https://www.pst.no/trusselbilde/norsk-trusselvurdering/" rel="noopener">Nasjonal trusselvurdering</a><span class="notat" title="Feeden er PSTs generelle nyhetsstrøm — mønsteret må være stramt for å unngå falske treff.">i</span></td>
+  <td><span class="tag tag-nasjonal">Nasjonal (NO)</span></td>
+  <td>Norge</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">feb 2027</td>
+  <td><span class="metode metode-feed" title="Overvåkes automatisk: https://pst.no/rss">Feed</span></td>
+</tr>
+<tr data-kategori="ot" data-land="US" data-metode="lenke" data-sok="dragos ot/ics cybersecurity year in review dragos-year-in-review">
+  <td class="utgiver">Dragos</td>
+  <td class="navn"><a href="https://www.dragos.com/ot-cybersecurity-year-in-review/" rel="noopener">OT/ICS Cybersecurity Year in Review</a><span class="notat" title="dragos.com deklarerer blog.rss i HTML, men feeden er tom (25 bytes) — ikke brukbar.">i</span></td>
+  <td><span class="tag tag-ot">OT/ICS</span></td>
+  <td>USA</td>
+  <td>Årlig</td>
+  <td class="siste">2026</td>
+  <td class="forventet ok">feb 2027</td>
+  <td><span class="metode metode-lenke" title="Ingen feed — sjekkes manuelt mot forventet dato">Lenke</span></td>
+</tr>
+</tbody>
+</table>
+    </div>
+  </section>
+
+  <details id="docs">
+<summary>Om denne siden</summary>
+<div class="docs-inner">
+<table class="docs-tabell">
+<tr data-docs-version="0.4.0"><th>Versjon</th><td>0.4.0</td></tr>
+<tr><th>Bygget</th><td>2026-09-17</td></tr>
+<tr><th>Kilder</th><td>23 (13 feed, 10 lenke)</td></tr>
+<tr><th>Kilderegister</th><td><a href="https://github.com/altmulig315-netizen/trusselrapporter/blob/main/sources.json" rel="noopener">sources.json</a></td></tr>
+<tr><th>Verifisering</th><td>2026-09-17 — alle landingssider og feed-URLer returnerte HTTP 200 (NSA: 403 for automatiserte kall, verifisert i nettleser).</td></tr>
+<tr><th>Protokoll</th><td>apv2.2</td></tr>
+</table>
+<h4>Hva betyr kolonnene</h4>
+<dl>
+<dt>Metode: Feed ⟳</dt><dd>Utgiveren har RSS/JSON. En poller sjekker daglig og oppdaterer «Siste utgave» automatisk når en post matcher rapportens tittelmønster.</dd>
+<dt>Metode: Lenke ↗</dt><dd>Ingen maskinlesbar feed. Siden viser lenke og forventet neste utgave; «Siste utgave» oppdateres manuelt.</dd>
+<dt>Forventet neste</dt><dd>Måned basert på historisk utgivelsesmønster. <span class="forfalt-inline">Forfalt</span> betyr at måneden har passert uten at ny utgave er observert.</dd>
+<dt>Løpende</dt><dd>Kilden har ingen «utgave» — den oppdateres kontinuerlig. «Siste utgave» viser sist observerte post.</dd>
+</dl>
+<h4>Siste endring (0.4.0)</h4>
+<pre class="logg"></pre>
+<p><a href="https://github.com/altmulig315-netizen/trusselrapporter/blob/main/CHANGELOG.md" rel="noopener">Full changelog</a> · <a href="https://github.com/altmulig315-netizen/trusselrapporter" rel="noopener">Kildekode</a></p>
+</div>
+</details>
+</main>
+
+<footer data-version="0.4.0">
+  <div class="wrap">v0.4.0 · bygget 2026-09-17 · apv2.2 · <a href="https://github.com/altmulig315-netizen/trusselrapporter" rel="noopener">GitHub</a></div>
+</footer>
+
+<script>
+(function () {
+  var rader = Array.prototype.slice.call(document.querySelectorAll('#tabell tbody tr'));
+  var sok = document.getElementById('sok'), fk = document.getElementById('f-kategori'), fl = document.getElementById('f-land'), fm = document.getElementById('f-metode');
+  var antall = document.getElementById('antall');
+  function filtrer() {
+    var q = sok.value.trim().toLowerCase(), k = fk.value, l = fl.value, m = fm.value, n = 0;
+    rader.forEach(function (r) {
+      var vis = (!k || r.dataset.kategori === k) && (!l || r.dataset.land === l) && (!m || r.dataset.metode === m) && (!q || r.dataset.sok.indexOf(q) !== -1);
+      r.hidden = !vis; if (vis) n++;
+    });
+    antall.textContent = n + ' av ' + rader.length;
+  }
+  [sok, fk, fl, fm].forEach(function (el) { el.addEventListener('input', filtrer); el.addEventListener('change', filtrer); });
+  filtrer();
+})();
+</script>
+</body>
+</html>
