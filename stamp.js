@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @version 0.1.0
+// @version 0.2.0
 // stamp.js — apv2.2 §4: propagerer ny versjon fra ett sted til alle stempler.
 // Bruk: node stamp.js 0.2.0
 // Oppdaterer version.json, @version i alle headers, og legger inn ny CHANGELOG-seksjon
