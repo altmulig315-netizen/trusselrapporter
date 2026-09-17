@@ -2,7 +2,6 @@
   "_skjema": "Se bolletest.js §SKJEMA. metode=feed krever feed.url + feed.monster (regex, case-insensitiv). kadens=løpende krever forventet_neste=null. dato/url i siste_utgave er null til de er verifisert.",
   "_verifisert": "2026-09-17 — alle landingssider og feed-URLer returnerte HTTP 200 (NSA: 403 for automatiserte kall, verifisert i nettleser).",
   "kilder": [
-
     {
       "id": "cisa-kev",
       "utgiver": "CISA",
@@ -11,10 +10,18 @@
       "land": "US",
       "kadens": "løpende",
       "landingsside": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-      "siste_utgave": { "aar": 2026, "dato": "2026-09-16", "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json" },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": "2026-09-16",
+        "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+      },
       "forventet_neste": null,
       "metode": "feed",
-      "feed": { "format": "json", "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", "monster": "." }
+      "feed": {
+        "format": "json",
+        "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "monster": "."
+      }
     },
     {
       "id": "cisa-advisories",
@@ -24,10 +31,18 @@
       "land": "US",
       "kadens": "løpende",
       "landingsside": "https://www.cisa.gov/news-events/cybersecurity-advisories",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": "2026-09-16",
+        "url": "https://www.cisa.gov/news-events/alerts/2026/09/16/cisa-adds-one-known-exploited-vulnerability-catalog"
+      },
       "forventet_neste": null,
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "monster": "." }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+        "monster": "."
+      }
     },
     {
       "id": "nsa-year-in-review",
@@ -37,7 +52,11 @@
       "land": "US",
       "kadens": "årlig",
       "landingsside": "https://www.nsa.gov/Cybersecurity/Year-in-Review/",
-      "siste_utgave": { "aar": 2024, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2024,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-01",
       "metode": "lenke",
       "notat": "Ingen 2025-utgave publisert per 2026-09-17 — siste er 2024. Kan være forsinket eller avviklet. nsa.gov gir 403 for automatiserte kall."
@@ -50,10 +69,18 @@
       "land": "UK",
       "kadens": "årlig",
       "landingsside": "https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": "https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025" },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": "https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025"
+      },
       "forventet_neste": "2026-10",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml", "monster": "annual review" },
+      "feed": {
+        "format": "rss",
+        "url": "https://www.ncsc.gov.uk/api/1/services/v1/news-rss-feed.xml",
+        "monster": "annual review"
+      },
       "notat": "Nyhetsfeeden brukes — rapportfeeden (report-rss-feed.xml) har stått stille siden mai 2025."
     },
     {
@@ -64,12 +91,19 @@
       "land": "UK",
       "kadens": "årlig",
       "landingsside": "https://nationalcrimeagency.gov.uk/nsa",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": "https://www.nationalcrimeagency.gov.uk/nsa-2026" },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": "https://www.nationalcrimeagency.gov.uk/nsa-2026"
+      },
       "forventet_neste": "2027-06",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.nationalcrimeagency.gov.uk/news?format=feed&type=rss", "monster": "national strategic assessment" }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.nationalcrimeagency.gov.uk/news?format=feed&type=rss",
+        "monster": "national strategic assessment"
+      }
     },
-
     {
       "id": "pst-nasjonal-trusselvurdering",
       "utgiver": "PST",
@@ -78,10 +112,18 @@
       "land": "NO",
       "kadens": "årlig",
       "landingsside": "https://www.pst.no/trusselbilde/norsk-trusselvurdering/",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-02",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://pst.no/rss", "monster": "nasjonal trusselvurdering|\\bNTV\\b" },
+      "feed": {
+        "format": "rss",
+        "url": "https://pst.no/rss",
+        "monster": "nasjonal trusselvurdering|\\bNTV\\b"
+      },
       "notat": "Feeden er PSTs generelle nyhetsstrøm — mønsteret må være stramt for å unngå falske treff."
     },
     {
@@ -92,7 +134,11 @@
       "land": "NO",
       "kadens": "årlig",
       "landingsside": "https://www.etterretningstjenesten.no/publikasjoner/fokus",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-02",
       "metode": "lenke",
       "notat": "Nettstedet har bot-beskyttelse (\"Client Challenge\") — ingen feed, må sjekkes manuelt."
@@ -105,12 +151,19 @@
       "land": "NO",
       "kadens": "årlig",
       "landingsside": "https://nsm.no/regelverk-og-hjelp/rapporter/",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": "https://nsm.no/aktuelt/risiko-2026" },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": "https://nsm.no/aktuelt/risiko-2026"
+      },
       "forventet_neste": "2027-03",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://nsm.no/rss/alle-oppdateringer-fra-nsm/", "monster": "\\brisiko 20\\d{2}|nasjonalt digitalt risikobilde" }
+      "feed": {
+        "format": "rss",
+        "url": "https://nsm.no/rss/alle-oppdateringer-fra-nsm/",
+        "monster": "\\brisiko 20\\d{2}|nasjonalt digitalt risikobilde"
+      }
     },
-
     {
       "id": "enisa-threat-landscape",
       "utgiver": "ENISA",
@@ -119,7 +172,11 @@
       "land": "EU",
       "kadens": "årlig",
       "landingsside": "https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": "https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025" },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": "https://www.enisa.europa.eu/publications/enisa-threat-landscape-2025"
+      },
       "forventet_neste": "2026-10",
       "metode": "lenke",
       "notat": "ENISA har ingen RSS-feed (verifisert 2026-09-10 og 2026-09-17)."
@@ -132,10 +189,18 @@
       "land": "EU",
       "kadens": "årlig",
       "landingsside": "https://www.europol.europa.eu/publications-events/main-reports/iocta-report",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-07",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.europol.europa.eu/rss.xml", "monster": "\\bIOCTA\\b|internet organised crime threat assessment" }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.europol.europa.eu/rss.xml",
+        "monster": "\\bIOCTA\\b|internet organised crime threat assessment"
+      }
     },
     {
       "id": "europol-socta",
@@ -145,10 +210,18 @@
       "land": "EU",
       "kadens": "hvert-4-år",
       "landingsside": "https://www.europol.europa.eu/publications-events/main-reports/socta-report",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2029-03",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.europol.europa.eu/rss.xml", "monster": "\\bSOCTA\\b|serious and organised crime threat assessment" }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.europol.europa.eu/rss.xml",
+        "monster": "\\bSOCTA\\b|serious and organised crime threat assessment"
+      }
     },
     {
       "id": "eeas-fimi",
@@ -158,12 +231,15 @@
       "land": "EU",
       "kadens": "årlig",
       "landingsside": "https://www.eeas.europa.eu/eeas/tackling-disinformation-foreign-information-manipulation-interference_en",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-03",
       "metode": "lenke",
       "notat": "Siste på landingssiden er 3. rapport (2025). Ingen 4. rapport funnet per 2026-09-17."
     },
-
     {
       "id": "microsoft-digital-defense-report",
       "utgiver": "Microsoft",
@@ -172,10 +248,18 @@
       "land": "US",
       "kadens": "årlig",
       "landingsside": "https://www.microsoft.com/en-us/security/security-insider/threat-landscape/microsoft-digital-defense-report-archives",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2026-10",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.microsoft.com/en-us/security/blog/feed/", "monster": "digital defense report" }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.microsoft.com/en-us/security/blog/feed/",
+        "monster": "digital defense report"
+      }
     },
     {
       "id": "crowdstrike-global-threat-report",
@@ -185,10 +269,18 @@
       "land": "US",
       "kadens": "årlig",
       "landingsside": "https://www.crowdstrike.com/en-us/global-threat-report/",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-02",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.crowdstrike.com/blog/feed/", "monster": "global threat report" }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.crowdstrike.com/blog/feed/",
+        "monster": "global threat report"
+      }
     },
     {
       "id": "google-mandiant-m-trends",
@@ -198,7 +290,11 @@
       "land": "US",
       "kadens": "årlig",
       "landingsside": "https://cloud.google.com/security/resources/m-trends",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-04",
       "metode": "lenke",
       "notat": "Google Cloud-bloggen har ingen fungerende RSS (Angular-app). GTIG-rapporter publiseres samme sted."
@@ -211,7 +307,11 @@
       "land": "US",
       "kadens": "årlig",
       "landingsside": "https://www.verizon.com/business/resources/reports/dbir/",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-05",
       "metode": "lenke"
     },
@@ -223,7 +323,11 @@
       "land": "UK",
       "kadens": "årlig",
       "landingsside": "https://www.sophos.com/en-us/content/security-threat-report",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-04",
       "metode": "lenke",
       "notat": "Ingen 2026-utgave per 2026-09-17. sophos.com blokkerer automatiserte kall (WAF) — verifisert i nettleser."
@@ -236,12 +340,15 @@
       "land": "UK",
       "kadens": "årlig",
       "landingsside": "https://www.sophos.com/en-us/content/state-of-ransomware",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-06",
       "metode": "lenke",
       "notat": "7. utgave (2026). Undersøkelsen gjennomføres jan–mar, rapporten kommer typisk mai–juni."
     },
-
     {
       "id": "dragos-year-in-review",
       "utgiver": "Dragos",
@@ -250,12 +357,15 @@
       "land": "US",
       "kadens": "årlig",
       "landingsside": "https://www.dragos.com/ot-cybersecurity-year-in-review/",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2027-02",
       "metode": "lenke",
       "notat": "dragos.com deklarerer blog.rss i HTML, men feeden er tom (25 bytes) — ikke brukbar."
     },
-
     {
       "id": "fsisac-navigating-cyber",
       "utgiver": "FS-ISAC",
@@ -264,7 +374,11 @@
       "land": "INT",
       "kadens": "årlig",
       "landingsside": "https://www.fsisac.com/navigatingcyber2025",
-      "siste_utgave": { "aar": 2025, "dato": null, "url": "https://www.fsisac.com/navigatingcyber2025" },
+      "siste_utgave": {
+        "aar": 2025,
+        "dato": null,
+        "url": "https://www.fsisac.com/navigatingcyber2025"
+      },
       "forventet_neste": "2027-03",
       "metode": "lenke",
       "notat": "Ingen 2026-utgave funnet per 2026-09-17. Landingssiden er årsspesifikk — må oppdateres manuelt ved ny utgave."
@@ -277,10 +391,18 @@
       "land": "EU",
       "kadens": "årlig",
       "landingsside": "https://www.bankingsupervision.europa.eu/framework/priorities/html/index.en.html",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": null,
+        "url": null
+      },
       "forventet_neste": "2026-12",
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.bankingsupervision.europa.eu/rss/press.html", "monster": "supervisory priorities" },
+      "feed": {
+        "format": "rss",
+        "url": "https://www.bankingsupervision.europa.eu/rss/press.html",
+        "monster": "supervisory priorities"
+      },
       "notat": "Prioriteringene for 2026–2028 ble publisert desember 2025."
     },
     {
@@ -291,10 +413,18 @@
       "land": "INT",
       "kadens": "løpende",
       "landingsside": "https://www.fsb.org/work-of-the-fsb/financial-innovation-and-structural-change/cyber-resilience/",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": "2026-09-11",
+        "url": "https://www.fsb.org/2026/09/fsb-hosts-roundtable-on-public-private-sector-collaboration-to-strengthen-operational-resilience/"
+      },
       "forventet_neste": null,
       "metode": "feed",
-      "feed": { "format": "rss", "url": "https://www.fsb.org/feed/", "monster": "cyber|operational resilience|incident report" }
+      "feed": {
+        "format": "rss",
+        "url": "https://www.fsb.org/feed/",
+        "monster": "cyber|operational resilience|incident report"
+      }
     },
     {
       "id": "bis-fsi-cyber",
@@ -304,10 +434,18 @@
       "land": "INT",
       "kadens": "løpende",
       "landingsside": "https://www.bis.org/fsi/index.htm",
-      "siste_utgave": { "aar": 2026, "dato": null, "url": null },
+      "siste_utgave": {
+        "aar": 2026,
+        "dato": "2026-09-09",
+        "url": "https://www.bis.org/publications/fsi-paper-28-when-machines-attack-frontier-ai-cyber-threats-and-policy-responses-financial-sector"
+      },
       "forventet_neste": null,
       "metode": "feed",
-      "feed": { "format": "rdf", "url": "https://www.bis.org/doclist/bis_fsi_publs.rss", "monster": "cyber|operational resilience" },
+      "feed": {
+        "format": "rdf",
+        "url": "https://www.bis.org/doclist/bis_fsi_publs.rss",
+        "monster": "cyber|operational resilience"
+      },
       "notat": "Feeden er RSS 1.0/RDF, ikke RSS 2.0 — parseren må håndtere begge."
     }
   ]

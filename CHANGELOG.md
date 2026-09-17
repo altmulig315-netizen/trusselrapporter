@@ -4,6 +4,18 @@ Alle vesentlige endringer i prosjektet dokumenteres her.
 Formatet følger [Keep a Changelog](https://keepachangelog.com/no/1.1.0/),
 og prosjektet bruker [SemVer](https://semver.org/lang/no/).
 
+## [0.3.0] — 2026-09-17
+
+### Added
+- Etappe 2: `poll.js` — henter alle feed-kilder, parser RSS 2.0, RSS 1.0/RDF og CISA KEV-JSON
+  med én avhengighetsfri parser, matcher titler mot `feed.monster` og oppdaterer `siste_utgave`
+  når en nyere utgave observeres.
+- Tørrkjøring er standard; `--skriv` kreves for å endre registeret. `--feed-dir` leser lokale
+  testfiler i stedet for nettet.
+
+### Changed
+- `siste_utgave` for cisa-advisories, fsb-cyber og bis-fsi-cyber fylt inn av første live-kjøring.
+
 ## [0.2.0] — 2026-09-17
 
 ### Added
