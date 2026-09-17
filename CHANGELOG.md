@@ -4,6 +4,19 @@ Alle vesentlige endringer i prosjektet dokumenteres her.
 Formatet følger [Keep a Changelog](https://keepachangelog.com/no/1.1.0/),
 og prosjektet bruker [SemVer](https://semver.org/lang/no/).
 
+## [0.5.0] — 2026-09-17
+
+### Added
+- Etappe 4: GitHub Actions-workflow `.github/workflows/poll.yml` — daglig kl. 05 UTC:
+  poll → build → bolletest → commit. Bolletesten er porten; feiler den, committes ingenting.
+  Kan også kjøres manuelt (workflow_dispatch).
+- GitHub Pages fra `main`. `.nojekyll` slår av Jekyll-prosessering.
+
+### Changed
+- Repoet er offentlig (krav for Pages på gratisplan).
+- Daglig datainnhenting bumper ikke versjonen — versjonen stempler programvaren, ikke dataene.
+  Byggedato på siden viser siste kjøring.
+
 ## [0.4.0] — 2026-09-17
 
 ### Added

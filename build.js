@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @version 0.4.0
+// @version 0.5.0
 // build.js — genererer index.html fra sources.json + version.json + CHANGELOG.md.
 // Nettsiden er helt statisk: all data rendres her, browser-JS gjør kun filtrering.
 // Stempler versjon i header-kommentar, footer (data-version) og docs-panel (data-docs-version).

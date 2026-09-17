@@ -1,0 +1,51 @@
+# Daglig kjøring: poll -> build -> bolletest -> commit.
+# Bolletesten er porten: feiler den, committes ingenting (apv2.2 §3/§5).
+name: Daglig poll
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # 05:00 UTC = 07:00 norsk sommertid / 06:00 vintertid
+  workflow_dispatch:       # manuell kjøring fra Actions-fanen
+
+permissions:
+  contents: write
+
+concurrency:
+  group: poll
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Poll feeds
+        id: poll
+        run: node poll.js --skriv
+        # Én feed som feiler skal ikke stoppe oppdatering av de andre.
+        continue-on-error: true
+
+      - name: Build index.html
+        run: node build.js
+
+      - name: Bolletest
+        run: node bolletest.js
+
+      - name: Commit og push ved endring
+        run: |
+          git config user.name "trusselrapporter-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- sources.json index.html; then
+            echo "ingen endring"
+            exit 0
+          fi
+          suffix=""
+          if [ "${{ steps.poll.outcome }}" = "failure" ]; then suffix=" (delvis: én eller flere feeds feilet, se logg)"; fi
+          git add sources.json index.html
+          git commit -m "poll: $(date -u +%F)${suffix}"
+          git push

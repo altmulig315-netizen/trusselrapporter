@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @version 0.4.0
+// @version 0.5.0
 // bolletest.js — apv2.2 §3: Node-verifisering før embedding.
 // Sjekker (1) SemVer i version.json, (2) at alle versjonsstempler er identiske,
 // (3) skjemaet i sources.json når den finnes. Avslutter med kode 1 ved feil.

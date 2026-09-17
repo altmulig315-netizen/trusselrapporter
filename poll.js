@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @version 0.4.0
+// @version 0.5.0
 // poll.js — henter feed-kildene i sources.json, matcher titler mot tittelmønster,
 // og oppdaterer siste_utgave når en nyere utgave er funnet.
 // Bruk:  node poll.js               (tørrkjøring — viser hva som ville endret seg)

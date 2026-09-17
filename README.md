@@ -16,6 +16,7 @@ Prosjektet følger **apv2.2**.
 | `sources.json` | Kilderegister (etappe 1). |
 | `poll.js` | Feed-poller (etappe 2). |
 | `build.js` → `index.html` | Statisk nettside (etappe 3). |
+| `.github/workflows/poll.yml` | Daglig cron: poll → build → bolletest → commit. |
 | `hooks/pre-commit` | Versjonert kopi av git-hooken. Installeres i `.git/hooks/`. |
 
 ## Arbeidsflyt ved endring
@@ -28,6 +29,8 @@ Prosjektet følger **apv2.2**.
 6. `git commit` (hooken kjører bolletesten igjen og blokkerer ved feil)
 
 ## Daglig drift
+
+Kjøres automatisk av GitHub Actions (`.github/workflows/poll.yml`) hver morgen. Manuelt:
 
 ```sh
 node poll.js --skriv && node build.js && node bolletest.js && git commit -am "poll: $(date +%F)"
