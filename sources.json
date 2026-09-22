@@ -12,7 +12,7 @@
       "landingsside": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
       "siste_utgave": {
         "aar": 2026,
-        "dato": "2026-09-18",
+        "dato": "2026-09-21",
         "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
       },
       "forventet_neste": null,
@@ -33,8 +33,8 @@
       "landingsside": "https://www.cisa.gov/news-events/cybersecurity-advisories",
       "siste_utgave": {
         "aar": 2026,
-        "dato": "2026-09-18",
-        "url": "https://www.cisa.gov/news-events/alerts/2026/09/18/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+        "dato": "2026-09-21",
+        "url": "https://www.cisa.gov/news-events/alerts/2026/09/21/cisa-adds-one-known-exploited-vulnerability-catalog"
       },
       "forventet_neste": null,
       "metode": "feed",
