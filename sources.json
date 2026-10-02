@@ -12,7 +12,7 @@
       "landingsside": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
       "siste_utgave": {
         "aar": 2026,
-        "dato": "2026-09-30",
+        "dato": "2026-10-01",
         "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
       },
       "forventet_neste": null,
@@ -33,8 +33,8 @@
       "landingsside": "https://www.cisa.gov/news-events/cybersecurity-advisories",
       "siste_utgave": {
         "aar": 2026,
-        "dato": "2026-09-30",
-        "url": "https://www.cisa.gov/news-events/alerts/2026/09/30/cisa-adds-one-known-exploited-vulnerability-catalog"
+        "dato": "2026-10-01",
+        "url": "https://www.cisa.gov/news-events/ics-advisories/icsa-26-274-01"
       },
       "forventet_neste": null,
       "metode": "feed",
@@ -249,9 +249,9 @@
       "kadens": "årlig",
       "landingsside": "https://www.microsoft.com/en-us/security/security-insider/threat-landscape/microsoft-digital-defense-report-archives",
       "siste_utgave": {
-        "aar": 2025,
-        "dato": null,
-        "url": null
+        "aar": 2026,
+        "dato": "2026-10-01",
+        "url": "https://www.microsoft.com/en-us/security/blog/2026/10/01/insights-from-the-2026-microsoft-digital-defense-report/"
       },
       "forventet_neste": "2026-10",
       "metode": "feed",
